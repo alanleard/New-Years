@@ -1,0 +1,183 @@
+Logfile initialized
+[INFO] logfile = /Users/alanleard/TiApps/New Years/build.log
+[DEBUG] /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/builder.py simulator New Years /Applications/android-sdk-mac_x86 /Users/alanleard/TiApps/New Years com.NewYears.app 8 WVGA854 
+[INFO] Building New Years for Android ... one moment
+[INFO] Titanium SDK version: 1.8.0 (11/03/11 12:38 8c28f36...)
+[DEBUG] Waiting for device to be ready ...
+[TRACE] adb devices returned 1 devices/emulators
+[DEBUG] Device connected... (waited 0 seconds)
+[DEBUG] waited 0.019902 seconds on emulator to get ready
+[DEBUG] com.NewYears.app installed? False
+[INFO] Fastdev server running, deploying in Fastdev mode
+[INFO] Copying project resources..
+[INFO] Detected tiapp.xml change (or assets deleted), forcing full re-build...
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/android/appicon.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/appicon.png
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/android/default.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/default.png
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/app.js => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/app.js
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/AuldLangSyne.mp3 => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/AuldLangSyne.mp3
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/bg.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/bg.png
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/Central.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/Central.png
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/CST.js => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/CST.js
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/default_app_logo.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/default_app_logo.png
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/defult.psd => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/defult.psd
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/Eastern.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/Eastern.png
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/EST.js => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/EST.js
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/Hawaii.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/Hawaii.png
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/HST.js => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/HST.js
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/icon.psd => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/icon.psd
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/largeIcon.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/largeIcon.png
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/Mountain.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/Mountain.png
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/MST.js => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/MST.js
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/MusicOff.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/MusicOff.png
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/MusicOn.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/MusicOn.png
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/musicStart.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/musicStart.png
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/New_Years.mobileprovision => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/New_Years.mobileprovision
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/New_Years_2011.mobileprovision => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/New_Years_2011.mobileprovision
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/other.js => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/other.js
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/Pacific.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/Pacific.png
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/PST.js => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/PST.js
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/start.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/start.png
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/stop.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/stop.png
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/TMZ.js => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/TMZ.js
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/TMZMap.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/TMZMap.png
+[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/win.js => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/win.js
+[TRACE] Generating Java Classes
+[DEBUG] Processing Android resource drawables
+[TRACE] COPYING FILE: /Users/alanleard/TiApps/New Years/Resources/android/images/res-long-land-hdpi/default.png => /Users/alanleard/TiApps/New Years/build/android/res/drawable-long-land-hdpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/alanleard/TiApps/New Years/Resources/android/images/res-long-land-ldpi/default.png => /Users/alanleard/TiApps/New Years/build/android/res/drawable-long-land-ldpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/alanleard/TiApps/New Years/Resources/android/images/res-long-port-hdpi/default.png => /Users/alanleard/TiApps/New Years/build/android/res/drawable-long-port-hdpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/alanleard/TiApps/New Years/Resources/android/images/res-long-port-ldpi/default.png => /Users/alanleard/TiApps/New Years/build/android/res/drawable-long-port-ldpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-land-hdpi/default.png => /Users/alanleard/TiApps/New Years/build/android/res/drawable-notlong-land-hdpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-land-ldpi/default.png => /Users/alanleard/TiApps/New Years/build/android/res/drawable-notlong-land-ldpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-land-mdpi/default.png => /Users/alanleard/TiApps/New Years/build/android/res/drawable-notlong-land-mdpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-port-hdpi/default.png => /Users/alanleard/TiApps/New Years/build/android/res/drawable-notlong-port-hdpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-port-ldpi/default.png => /Users/alanleard/TiApps/New Years/build/android/res/drawable-notlong-port-ldpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-port-mdpi/default.png => /Users/alanleard/TiApps/New Years/build/android/res/drawable-notlong-port-mdpi/default_d44e27d97b.png
+[DEBUG] app stylesheet => /Users/alanleard/TiApps/New Years/build/android/gen/com/NewYears/app/ApplicationStylesheet.java
+[DEBUG] copying app icon: /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/appicon.png
+[DEBUG] generating theme.xml
+[DEBUG] found drawable-long-land-hdpi splash screen at /Users/alanleard/TiApps/New Years/Resources/android/images/res-long-land-hdpi/default.png
+[DEBUG] copying /Users/alanleard/TiApps/New Years/Resources/android/images/res-long-land-hdpi/default.png splash screen to /Users/alanleard/TiApps/New Years/build/android/res/drawable-long-land-hdpi/background.png
+[DEBUG] found drawable-long-land-ldpi splash screen at /Users/alanleard/TiApps/New Years/Resources/android/images/res-long-land-ldpi/default.png
+[DEBUG] copying /Users/alanleard/TiApps/New Years/Resources/android/images/res-long-land-ldpi/default.png splash screen to /Users/alanleard/TiApps/New Years/build/android/res/drawable-long-land-ldpi/background.png
+[DEBUG] found drawable-long-port-hdpi splash screen at /Users/alanleard/TiApps/New Years/Resources/android/images/res-long-port-hdpi/default.png
+[DEBUG] copying /Users/alanleard/TiApps/New Years/Resources/android/images/res-long-port-hdpi/default.png splash screen to /Users/alanleard/TiApps/New Years/build/android/res/drawable-long-port-hdpi/background.png
+[DEBUG] found drawable-long-port-ldpi splash screen at /Users/alanleard/TiApps/New Years/Resources/android/images/res-long-port-ldpi/default.png
+[DEBUG] copying /Users/alanleard/TiApps/New Years/Resources/android/images/res-long-port-ldpi/default.png splash screen to /Users/alanleard/TiApps/New Years/build/android/res/drawable-long-port-ldpi/background.png
+[DEBUG] found drawable-notlong-land-hdpi splash screen at /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-land-hdpi/default.png
+[DEBUG] copying /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-land-hdpi/default.png splash screen to /Users/alanleard/TiApps/New Years/build/android/res/drawable-notlong-land-hdpi/background.png
+[DEBUG] found drawable-notlong-land-ldpi splash screen at /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-land-ldpi/default.png
+[DEBUG] copying /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-land-ldpi/default.png splash screen to /Users/alanleard/TiApps/New Years/build/android/res/drawable-notlong-land-ldpi/background.png
+[DEBUG] found drawable-notlong-land-mdpi splash screen at /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-land-mdpi/default.png
+[DEBUG] copying /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-land-mdpi/default.png splash screen to /Users/alanleard/TiApps/New Years/build/android/res/drawable-notlong-land-mdpi/background.png
+[DEBUG] found drawable-notlong-port-hdpi splash screen at /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-port-hdpi/default.png
+[DEBUG] copying /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-port-hdpi/default.png splash screen to /Users/alanleard/TiApps/New Years/build/android/res/drawable-notlong-port-hdpi/background.png
+[DEBUG] found drawable-notlong-port-ldpi splash screen at /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-port-ldpi/default.png
+[DEBUG] copying /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-port-ldpi/default.png splash screen to /Users/alanleard/TiApps/New Years/build/android/res/drawable-notlong-port-ldpi/background.png
+[DEBUG] found drawable-notlong-port-mdpi splash screen at /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-port-mdpi/default.png
+[DEBUG] copying /Users/alanleard/TiApps/New Years/Resources/android/images/res-notlong-port-mdpi/default.png splash screen to /Users/alanleard/TiApps/New Years/build/android/res/drawable-notlong-port-mdpi/background.png
+[DEBUG] found splash screen at /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/default.png
+[TRACE] Writing out AndroidManifest.xml
+[DEBUG] adding /Users/alanleard/TiApps/New Years/build/android/gen/com/NewYears/app/ApplicationStylesheet.java to javac build list
+[DEBUG] adding /Users/alanleard/TiApps/New Years/build/android/gen/com/NewYears/app/NewYearsActivity.java to javac build list
+[DEBUG] adding /Users/alanleard/TiApps/New Years/build/android/gen/com/NewYears/app/NewYearsAppInfo.java to javac build list
+[DEBUG] adding /Users/alanleard/TiApps/New Years/build/android/gen/com/NewYears/app/NewYearsApplication.java to javac build list
+[DEBUG] adding /Users/alanleard/TiApps/New Years/build/android/gen/com/NewYears/app/R.java to javac build list
+[DEBUG] Building Java Sources: "/Users/alanleard/TiApps/New Years/build/android/gen/com/NewYears/app/ApplicationStylesheet.java" "/Users/alanleard/TiApps/New Years/build/android/gen/com/NewYears/app/NewYearsActivity.java" "/Users/alanleard/TiApps/New Years/build/android/gen/com/NewYears/app/NewYearsAppInfo.java" "/Users/alanleard/TiApps/New Years/build/android/gen/com/NewYears/app/NewYearsApplication.java" "/Users/alanleard/TiApps/New Years/build/android/gen/com/NewYears/app/R.java"
+[INFO] Waiting for SDCard to become available..
+[INFO] Compiling Android Resources... This could take some time
+[DEBUG] Android classes.dex built
+[DEBUG] creating unsigned apk: /Users/alanleard/TiApps/New Years/build/android/bin/app-unsigned.apk
+[DEBUG] from resource zip => assets/Resources/AuldLangSyne.mp3
+[DEBUG] from resource zip => assets/Resources/CST.js
+[DEBUG] from resource zip => assets/Resources/Central.png
+[DEBUG] from resource zip => assets/Resources/EST.js
+[DEBUG] from resource zip => assets/Resources/Eastern.png
+[DEBUG] from resource zip => assets/Resources/HST.js
+[DEBUG] from resource zip => assets/Resources/Hawaii.png
+[DEBUG] from resource zip => assets/Resources/MST.js
+[DEBUG] from resource zip => assets/Resources/Mountain.png
+[DEBUG] from resource zip => assets/Resources/MusicOff.png
+[DEBUG] from resource zip => assets/Resources/MusicOn.png
+[DEBUG] from resource zip => assets/Resources/New_Years.mobileprovision
+[DEBUG] from resource zip => assets/Resources/New_Years_2011.mobileprovision
+[DEBUG] from resource zip => assets/Resources/PST.js
+[DEBUG] from resource zip => assets/Resources/Pacific.png
+[DEBUG] from resource zip => assets/Resources/TMZ.js
+[DEBUG] from resource zip => assets/Resources/TMZMap.png
+[DEBUG] from resource zip => assets/Resources/app.js
+[DEBUG] from resource zip => assets/Resources/appicon.png
+[DEBUG] from resource zip => assets/Resources/bg.png
+[DEBUG] from resource zip => assets/Resources/default.png
+[DEBUG] from resource zip => assets/Resources/default_app_logo.png
+[DEBUG] from resource zip => assets/Resources/defult.psd
+[DEBUG] from resource zip => assets/Resources/icon.psd
+[DEBUG] from resource zip => assets/Resources/largeIcon.png
+[DEBUG] from resource zip => assets/Resources/musicStart.png
+[DEBUG] from resource zip => assets/Resources/other.js
+[DEBUG] from resource zip => assets/Resources/start.png
+[DEBUG] from resource zip => assets/Resources/stop.png
+[DEBUG] from resource zip => assets/Resources/win.js
+[DEBUG] from resource zip => assets/tiapp.xml
+[DEBUG] from resource zip => res/drawable/appicon.png
+[DEBUG] from resource zip => res/drawable/background.png
+[DEBUG] from resource zip => res/drawable/facebook_icon.png
+[DEBUG] from resource zip => res/drawable/facebook_login.png
+[DEBUG] from resource zip => res/drawable/facebook_login_down.png
+[DEBUG] from resource zip => res/drawable/facebook_login_wide.png
+[DEBUG] from resource zip => res/drawable/facebook_login_wide_down.png
+[DEBUG] from resource zip => res/drawable/facebook_logout.png
+[DEBUG] from resource zip => res/drawable/facebook_logout_down.png
+[DEBUG] from resource zip => res/layout/titanium_tabgroup.xml
+[DEBUG] from resource zip => AndroidManifest.xml
+[DEBUG] from resource zip => resources.arsc
+[DEBUG] from resource zip => res/drawable-hdpi/facebook_icon.png
+[DEBUG] from resource zip => res/drawable-ldpi/facebook_icon.png
+[DEBUG] from resource zip => res/drawable-long-land-hdpi/background.png
+[DEBUG] from resource zip => res/drawable-long-land-hdpi/default_d44e27d97b.png
+[DEBUG] from resource zip => res/drawable-long-land-ldpi/background.png
+[DEBUG] from resource zip => res/drawable-long-land-ldpi/default_d44e27d97b.png
+[DEBUG] from resource zip => res/drawable-long-port-hdpi/background.png
+[DEBUG] from resource zip => res/drawable-long-port-hdpi/default_d44e27d97b.png
+[DEBUG] from resource zip => res/drawable-long-port-ldpi/background.png
+[DEBUG] from resource zip => res/drawable-long-port-ldpi/default_d44e27d97b.png
+[DEBUG] from resource zip => res/drawable-notlong-land-hdpi/background.png
+[DEBUG] from resource zip => res/drawable-notlong-land-hdpi/default_d44e27d97b.png
+[DEBUG] from resource zip => res/drawable-notlong-land-ldpi/background.png
+[DEBUG] from resource zip => res/drawable-notlong-land-ldpi/default_d44e27d97b.png
+[DEBUG] from resource zip => res/drawable-notlong-land-mdpi/background.png
+[DEBUG] from resource zip => res/drawable-notlong-land-mdpi/default_d44e27d97b.png
+[DEBUG] from resource zip => res/drawable-notlong-port-hdpi/background.png
+[DEBUG] from resource zip => res/drawable-notlong-port-hdpi/default_d44e27d97b.png
+[DEBUG] from resource zip => res/drawable-notlong-port-ldpi/background.png
+[DEBUG] from resource zip => res/drawable-notlong-port-ldpi/default_d44e27d97b.png
+[DEBUG] from resource zip => res/drawable-notlong-port-mdpi/background.png
+[DEBUG] from resource zip => res/drawable-notlong-port-mdpi/default_d44e27d97b.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/modules/titanium-facebook.jar => ti/modules/titanium/facebook/LICENSE
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/modules/titanium-yahoo.jar => ti/modules/titanium/yahoo/yahoo.js
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/titanium.jar => org/apache/Commons-NOTICE.txt
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/titanium.jar => org/apache/HttpComponents-NOTICE.txt
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/titanium.jar => org/apache/mime4j-NOTICE.txt
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/titanium.jar => org/appcelerator/titanium/build.properties
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/titanium.jar => org/appcelerator/titanium/res/drawable/background.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_18.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_48.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_18.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_48.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_normal.9.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_pressed.9.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_selected.9.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/titanium.jar => org/appcelerator/titanium/res/drawable/default_icon.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/titanium.jar => org/appcelerator/titanium/res/drawable/photoDefault.png
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.js
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.min.js
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/json2.js
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/smalljs.jar => org/mozilla/javascript/resources/Messages.properties
+[DEBUG] from JAR /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/smalljs.jar => org/mozilla/javascript/resources/Messages_fr.properties
+[DEBUG] Waiting for device to be ready ...
+[TRACE] adb devices returned 1 devices/emulators
+[DEBUG] Device connected... (waited 0 seconds)
+[DEBUG] waited 0.018142 seconds on emulator to get ready
+[INFO] Installing application on device
