@@ -3,11 +3,22 @@ var win = Ti.UI.currentWindow;
         // Titanium.UI.LANDSCAPE_LEFT]
 // Titanium.UI.orientation = Titanium.UI.LANDSCAPE_LEFT;
 win.fullscreen = true;
+var actInd = Ti.UI.createActivityIndicator({color:'#fff'});
+
+actInd.style= Titanium.UI.iPhone.ActivityIndicatorStyle.BIG;
+var hideView = Ti.UI.createView({backgroundColor:'#000', opacity:0.9, visible:false, zIndex:100});
+
+hideView.add(actInd);
+actInd.show();
+
 var newYearPhoto = 'photo.png';
 
-
 var t3 = Ti.UI.create2DMatrix();
-	t3 = t3.rotate(-90);
+	t3 = t3.rotate(90);
+	
+if(Ti.Platform.osname == 'android'){
+	t3 = ''
+}
 var santa = Titanium.UI.createImageView({
 	image:'photo.png',
 	width:480,
@@ -22,23 +33,22 @@ if(Ti.Platform.osname == 'ipad'){
 	santa.width = 1024;
 }
 
-var close = Ti.UI.createButton({
-	title:'Back',
+var button = Ti.UI.createButton({
+	title:'Take Picture',
 	height:30,
-	width:50,
-	bottom:20,
-	left:5,
+	width:150,
+	bottom:70,
+	left:-45,
 	transform:t3
 });
 
 
-var button = Titanium.UI.createButton({
-	top:70,
-	right:-45,
+var back = Titanium.UI.createButton({
+	top:20,
+	right:5,
 	height:30,
-	width:150,
-	font:{fontSize:20,fontWeight:'bold',fontFamily:'Helvetica Neue'},
-	title:'Take Picture',
+	width:50,
+	title:'Back',
 	transform:t3
 });
 
@@ -47,19 +57,22 @@ var overlay = Titanium.UI.createView();
 
 
 overlay.add(santa);
-overlay.add(close);
+overlay.add(back);
 overlay.add(button);
 //win.add(overlay);
 // 
 // 
+
+overlay.add(hideView);
+
+
 button.addEventListener('click',function()
 {
 	//Ti.Media.vibrate();
 	Ti.Media.takePicture();
-	
 });
 
-close.addEventListener('click', function(){
+back.addEventListener('click', function(){
 	Ti.Media.hideCamera();
 	win.close();
 });
@@ -69,9 +82,11 @@ Titanium.Media.showCamera({
 
 	success:function(event)
 	{
+		hideView.show();
+		var win = Ti.UI.currentWindow;
 		win.orientationModes = [
-        Titanium.UI.LANDSCAPE_LEFT]
-		Titanium.UI.orientation = Titanium.UI.LANDSCAPE_LEFT;
+        Titanium.UI.LANDSCAPE_RIGHT];
+		Titanium.UI.orientation = Titanium.UI.LANDSCAPE_RIGHT;
 		win.fullscreen = true;
 	
 		var santa2 = Titanium.UI.createImageView({
@@ -98,7 +113,7 @@ Titanium.Media.showCamera({
 		win.add(view);
 		
 		// programatically hide the camera
-		//Ti.Media.hideCamera();
+		
 		
 		var save = Ti.UI.createButton({
 			title:'Save',
@@ -128,9 +143,12 @@ Titanium.Media.showCamera({
 		});
 		
 		cancel.addEventListener('click', function(){
+			
 			win.close();
 		});
 		Ti.Media.hideCamera();
+		hideView.hide();
+		
 	},
 	cancel:function()
 	{
@@ -141,10 +159,12 @@ Titanium.Media.showCamera({
 		if (error.code == Titanium.Media.NO_CAMERA)
 		{
 			a.setMessage('Sorry, you need a camera.');
+			win.close();
 		}
 		else
 		{
 			a.setMessage('Unexpected error: ' + error.code);
+			win.close();
 		}
 		a.show();
 	},
@@ -152,5 +172,4 @@ Titanium.Media.showCamera({
 	showControls:false,	// don't show system controls
 	mediaTypes:Ti.Media.MEDIA_TYPE_PHOTO,
 	autohide:false // tell the system not to auto-hide and we'll do it ourself
-	});
-	
+});

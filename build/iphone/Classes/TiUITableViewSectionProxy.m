@@ -28,6 +28,7 @@
 		if ([thisRow parent] == self)
 		{
 			[thisRow setParent:nil];
+            [thisRow setSection:nil];
 		}
 	}
 	RELEASE_TO_NIL(rows);

@@ -10,8 +10,6 @@
 #import "TiUIiOSAdViewProxy.h"
 #import "TiUtils.h"
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0
-
 #ifdef USE_TI_UIIOSADVIEW
 
 #import <iAd/iAd.h>
@@ -43,7 +41,5 @@ USE_VIEW_FOR_AUTO_WIDTH
 }
 
 @end
-
-#endif
 
 #endif

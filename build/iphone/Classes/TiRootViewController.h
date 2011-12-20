@@ -35,7 +35,6 @@
 	TiOrientationFlags	allowedOrientations;
 	UIInterfaceOrientation orientationHistory[4];
 
-	UIInterfaceOrientation lastOrientation;
 	UIInterfaceOrientation windowOrientation;
 
 	BOOL isCurrentlyVisible;
@@ -57,6 +56,7 @@
 	CGFloat leaveDuration;
 }
 
+@property(nonatomic,readonly) BOOL keyboardVisible;
 @property(nonatomic,readonly) UIImageView * defaultImageView;
 -(void)dismissDefaultImageView;
 
@@ -71,10 +71,9 @@
 -(CGRect)resizeView;
 -(void)repositionSubviews;
 
--(void)manuallyRotateToOrientation:(UIInterfaceOrientation)orientation;
+-(void)refreshOrientationWithDuration:(NSTimeInterval) duration;
+-(NSTimeInterval)suggestedRotationDuration;
 -(void)manuallyRotateToOrientation:(UIInterfaceOrientation)newOrientation duration:(NSTimeInterval)duration;
-
--(void)setOrientationModes:(NSArray *)newOrientationModes;
 
 - (void)openWindow:(TiWindowProxy *)window withObject:(id)args;
 - (void)closeWindow:(TiWindowProxy *)window withObject:(id)args;

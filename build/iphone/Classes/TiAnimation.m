@@ -8,7 +8,7 @@
  */
 #import "TiAnimation.h"
 #import "Ti2DMatrix.h"
-#import "Ti3DMatrix.h"
+#import "TiUIiOS3DMatrix.h"
 #import "TiUtils.h"
 #import "TiViewProxy.h"
 #import "LayoutConstraint.h"
@@ -465,16 +465,16 @@ if (!TiDimensionIsUndefined(autoreverseLayout.a)) {\
 	if ([view_ isKindOfClass:[TiUIView class]])
 	{	//TODO: Shouldn't we be updating the proxy's properties to reflect this?
 		TiUIView *uiview = (TiUIView*)view_;
-		LayoutConstraint *layout = [(TiViewProxy *)[uiview proxy] layoutProperties];
+		LayoutConstraint *layoutProperties = [(TiViewProxy *)[uiview proxy] layoutProperties];
 		
 
 		BOOL doReposition = NO;
 		
 #define CHECK_LAYOUT_CHANGE(a) \
-if (a!=nil && layout!=NULL) \
+if (a!=nil && layoutProperties!=NULL) \
 {\
-		autoreverseLayout.a = layout->a; \
-		layout->a = TiDimensionFromObject(a); \
+		autoreverseLayout.a = layoutProperties->a; \
+		layoutProperties->a = TiDimensionFromObject(a); \
 		doReposition = YES;\
 }\
 else \
@@ -487,12 +487,12 @@ else \
 		CHECK_LAYOUT_CHANGE(height);
 		CHECK_LAYOUT_CHANGE(top);
 		CHECK_LAYOUT_CHANGE(bottom);
-		if (center!=nil && layout != NULL)
+		if (center!=nil && layoutProperties != NULL)
 		{
-			autoreverseLayout.centerX = layout->centerX;
-			autoreverseLayout.centerY = layout->centerY;
-			layout->centerX = [center xDimension];
-			layout->centerY = [center yDimension];
+			autoreverseLayout.centerX = layoutProperties->centerX;
+			autoreverseLayout.centerY = layoutProperties->centerY;
+			layoutProperties->centerX = [center xDimension];
+			layoutProperties->centerY = [center yDimension];
 			doReposition = YES;
 		}
 		else

@@ -51,11 +51,16 @@
 	NSFileManager *fm = [NSFileManager defaultManager];
 	NSError *error = nil; 
 	NSDictionary * resultDict = [fm attributesOfItemAtPath:path error:&error];
-	id result = [resultDict objectForKey:NSFileSize];
-	if (error!=NULL)
+	id resultType = [resultDict objectForKey:NSFileType];
+	if ([resultType isEqualToString:NSFileTypeSymbolicLink])
+	{
+		resultDict = [fm attributesOfFileSystemForPath:path error:&error];
+	}
+	if (error != NULL)
 	{
 		return 0;
 	}
+	id result = [resultDict objectForKey:NSFileSize];
 	return [result intValue];
 }
 
@@ -94,7 +99,7 @@
 	} while ([fm fileExistsAtPath:resultPath]);
 	
 	// create empty file
-	[[NSData data] writeToFile:resultPath options:0 error:&error];
+	[[NSData data] writeToFile:resultPath options:NSDataWritingFileProtectionComplete error:&error];
 	
 	if (error != nil)
 	{

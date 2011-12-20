@@ -71,6 +71,7 @@
 
 - (void)beginEditing;
 - (void)endEditing;
+- (void)recreateButtons;
 
 - (LauncherItem*)itemForIndex:(NSInteger)index;
 - (NSArray*)items;

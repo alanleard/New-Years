@@ -43,21 +43,30 @@ win.addEventListener('open', function(){
 	dialog.show();
 });
 
-win.addEventListener('focus', function(){
-	
-	
-	setTimeout(function(){
-		tapView.animate({opacity:0.7, duration:200});
-	},200);
-	
-	setTimeout(function(){
-		tapView.animate({opacity:0.5, duration:200});
-	},400);
-});
+	var anim1 = Ti.UI.createAnimation({
+		duration:1000,
+		opacity:0.75
+	});
+	var anim2 = Ti.UI.createAnimation({
+		duration:1000,
+		opacity:0.3
+	});
+
+
+
 
 
 mapView.add(tapView);
 mapView.add(tapViewBtm);
+tapView.animate( anim1 );
+
+anim2.addEventListener('complete',function(){
+	tapView.animate( anim1 );
+});
+anim1.addEventListener('complete',function(){
+	tapView.animate( anim2 );
+});
+
 var zoom = 0.5;
 if(Ti.Platform.osname == 'ipad')
 {
@@ -71,6 +80,8 @@ win.add(scroll);
 
 var tmz = 0;
 function tap(e){
+
+		//tapView.animate({opacity:0.9, duration:50});
 	
 	if (e.x>56 && e.x<134){
 		tmz = -10;
@@ -113,7 +124,7 @@ function tap(e){
 	var win = Ti.UI.createWindow({url:'TMZ.js', tmz:tmz, title: 'GMT '+tmz});
 	
 	Ti.UI.currentTab.open(win);
-};
+}
 
 tapView.addEventListener('click', tap);
 tapViewBtm.addEventListener('click', tap);
@@ -121,11 +132,10 @@ tapViewBtm.addEventListener('click', tap);
 mapView.addEventListener('doubletap', function(e){
 	if(scroll.zoomScale < zoom+0.5){
 		
-		scroll.zoomScale += zoom
-		scroll.scrollTo((e.x-(Ti.Platform.displayCaps.platformWidth/2)),(e.y-(Ti.Platform.displayCaps.platformHeight/2)));
+		scroll.zoomScale += zoom;
 
 	} else {
-		scroll.zoomScale = zoom
+		scroll.zoomScale = zoom;
 	}
 });
 

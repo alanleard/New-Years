@@ -47,6 +47,10 @@
 	if (!CGRectIsEmpty(bounds))
 	{
 		[TiUtils setView:launcher positionRect:bounds];
+		if(launcher.editing == NO)
+		{
+			[launcher recreateButtons];
+		}
 	}
 }
 

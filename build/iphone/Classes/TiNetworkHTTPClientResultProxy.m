@@ -83,6 +83,7 @@
 		[self makeMethod:@selector(setRequestHeader:) args:YES key:@"setRequestHeader"];
 		[self makeMethod:@selector(setTimeout:) args:YES key:@"setTimeout"];
 		[self makeMethod:@selector(getResponseHeader:) args:YES key:@"getResponseHeader"];
+		[self makeMethod:@selector(clearCookies:) args:YES key:@"clearCookies"];
 		
 		[self makeDynamicProperty:@selector(responseText) key:@"responseText"];
 		// responseXML is special!
@@ -107,13 +108,13 @@
 -(TiDOMDocumentProxy*)responseXML
 {
 	NSString* responseText = [self valueForKey:@"responseText"];
-	if (responseText!=nil)
+	if (![responseText isEqual:(id)[NSNull null]])
 	{
 		TiDOMDocumentProxy *dom = [[[TiDOMDocumentProxy alloc] _initWithPageContext:[self executionContext]] autorelease];
 		[dom parseString:responseText];
 		return dom;
 	}
-	return nil;
+	return (id)[NSNull null];
 }
 
 -(id)getResponseHeader:(id)args

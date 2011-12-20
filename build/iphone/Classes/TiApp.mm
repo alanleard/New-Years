@@ -21,6 +21,10 @@
 #import "ApplicationDefaults.h"
 #import <libkern/OSAtomic.h>
 
+#ifdef KROLL_COVERAGE
+# import "KrollCoverage.h"
+#endif
+
 TiApp* sharedApp;
 
 int TiDebugPort = 2525;
@@ -88,11 +92,21 @@ void MyUncaughtExceptionHandler(NSException *exception)
 	insideException=NO;
 }
 
+BOOL applicationInMemoryPanic = NO;
+
+TI_INLINE void waitForMemoryPanicCleared();   //WARNING: This must never be run on main thread, or else there is a risk of deadlock!
+
 @interface TiApp()
 -(void)checkBackgroundServices;
 @end
 
 @implementation TiApp
+
+
+-(void)clearMemoryPanic
+{
+    applicationInMemoryPanic = NO;
+}
 
 @synthesize window, remoteNotificationDelegate, controller;
 
@@ -156,14 +170,8 @@ void MyUncaughtExceptionHandler(NSException *exception)
 	// attach our main view controller
 	controller = [[TiRootViewController alloc] init];
 	
-	if([window respondsToSelector:@selector(setRootViewController:)])
-	{
-		[window setRootViewController:controller];		
-	}
-	else
-	{
-		[window addSubview:[controller view]];
-	}
+	// attach our main view controller... IF we haven't already loaded the main window.
+	[window setRootViewController:controller];
     [window makeKeyAndVisible];
 }
 
@@ -191,7 +199,7 @@ void MyUncaughtExceptionHandler(NSException *exception)
 
 - (void)boot
 {
-	NSLog(@"[INFO] %@/%@ (%s.ab20af7)",TI_APPLICATION_NAME,TI_APPLICATION_VERSION,TI_VERSION_STR);
+	NSLog(@"[INFO] %@/%@ (%s.f80e354...)",TI_APPLICATION_NAME,TI_APPLICATION_VERSION,TI_VERSION_STR);
 	
 	sessionId = [[TiUtils createUUID] retain];
 	TITANIUM_VERSION = [[NSString stringWithCString:TI_VERSION_STR encoding:NSUTF8StringEncoding] retain];
@@ -206,17 +214,13 @@ void MyUncaughtExceptionHandler(NSException *exception)
             [self setDebugMode:YES];
             TiDebuggerStart(host,[port intValue]);
         }
+        [params release];
     }
 	
 	kjsBridge = [[KrollBridge alloc] initWithHost:self];
 	
 	[kjsBridge boot:self url:nil preload:nil];
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0
-	if ([TiUtils isIOS4OrGreater])
-	{
-		[[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-	}
-#endif
+	[[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
 }
 
 - (void)validator
@@ -307,6 +311,7 @@ void MyUncaughtExceptionHandler(NSException *exception)
 {
 	[launchOptions removeObjectForKey:UIApplicationLaunchOptionsURLKey];	
 	[launchOptions setObject:[url absoluteString] forKey:@"url"];
+    return YES;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -322,6 +327,9 @@ void MyUncaughtExceptionHandler(NSException *exception)
 	[xhrBridge shutdown:nil];
 #endif	
 
+#ifdef KROLL_COVERAGE
+	[KrollCoverageObject releaseCoverage];
+#endif
 	//These shutdowns return immediately, yes, but the main will still run the close that's in their queue.	
 	[kjsBridge shutdown:condition];
 
@@ -348,11 +356,13 @@ void MyUncaughtExceptionHandler(NSException *exception)
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
+    applicationInMemoryPanic = YES;
 	[Webcolor flushCache];
 	// don't worry about KrollBridge since he's already listening
 #ifdef USE_TI_UIWEBVIEW
 	[xhrBridge gc];
 #endif 
+    [self performSelector:@selector(clearMemoryPanic) withObject:nil afterDelay:0.0];
 }
 
 -(void)applicationWillResignActive:(UIApplication *)application
@@ -383,7 +393,6 @@ void MyUncaughtExceptionHandler(NSException *exception)
 {
 	[TiUtils queueAnalytics:@"ti.background" name:@"ti.background" data:nil];
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0
 	
 	if (backgroundServices==nil)
 	{
@@ -409,7 +418,6 @@ void MyUncaughtExceptionHandler(NSException *exception)
         // Do the work associated with the task.
 		[tiapp beginBackgrounding];
     });
-#endif	
 	
 }
 
@@ -418,7 +426,6 @@ void MyUncaughtExceptionHandler(NSException *exception)
 	[[NSNotificationCenter defaultCenter] postNotificationName:kTiResumeNotification object:self];
 	
 	[TiUtils queueAnalytics:@"ti.foreground" name:@"ti.foreground" data:nil];
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0
 	
 	if (backgroundServices==nil)
 	{
@@ -426,8 +433,6 @@ void MyUncaughtExceptionHandler(NSException *exception)
 	}
 	
 	[self endBackgrounding];
-	
-#endif
 
 }
 
@@ -556,9 +561,13 @@ void MyUncaughtExceptionHandler(NSException *exception)
 -(void)hideModalController:(UIViewController*)modalController animated:(BOOL)animated
 {
 	UIViewController *navController = [modalController parentViewController];
-	if (navController==nil)
+
+	//	As of iOS 5, Apple is phasing out the modal concept in exchange for
+	//	'presenting', making all non-Ti modal view controllers claim to have
+	//	no parent view controller.
+	if (navController==nil && [modalController respondsToSelector:@selector(presentingViewController)])
 	{
-//		navController = [controller currentNavController];
+		navController = [modalController presentingViewController];
 	}
 	[controller windowClosed:modalController];
 	if (navController!=nil)
@@ -588,10 +597,8 @@ void MyUncaughtExceptionHandler(NSException *exception)
     if ([self debugMode]) {
         TiDebuggerStop();
     }
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0
 	RELEASE_TO_NIL(backgroundServices);
 	RELEASE_TO_NIL(localNotification);
-#endif	
 	[super dealloc];
 }
 
@@ -622,8 +629,6 @@ void MyUncaughtExceptionHandler(NSException *exception)
 {
 	return kjsBridge;
 }
-
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0
 
 #pragma mark Backgrounding
 
@@ -701,7 +706,5 @@ void MyUncaughtExceptionHandler(NSException *exception)
 	[backgroundServices removeObject:proxy];
 	[self checkBackgroundServices];
 }
-
-#endif
 
 @end

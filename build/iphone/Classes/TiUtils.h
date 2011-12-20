@@ -63,6 +63,7 @@ typedef enum {
 +(BOOL)boolValue:(id)value def:(BOOL)def;
 
 +(CGPoint)pointValue:(id)value;
++(CGPoint)pointValue:(id)value valid:(BOOL*)isValid;
 +(CGPoint)pointValue:(id)value bounds:(CGRect)bounds defaultOffset:(CGPoint)defaultOffset;
 
 +(CGRect)rectValue:(id)value;
@@ -198,11 +199,9 @@ typedef enum {
 
 +(BOOL)isIPad;
 
-+(BOOL)isiPhoneOS3_2OrGreater;
-
-+(BOOL)isIOS4OrGreater;
-
 +(BOOL)isIOS4_2OrGreater;
+
++(BOOL)isIOS5OrGreater;
 
 +(BOOL)isIPhone4;
 

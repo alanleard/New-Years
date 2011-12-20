@@ -11,6 +11,7 @@
 #import "TiUIiPhoneNavigationGroup.h"
 #import "TiUtils.h"
 #import "TiWindowProxy.h"
+#import "TiUIiPhoneNavigationGroupProxy.h"
 
 @implementation TiUIiPhoneNavigationGroup
 
@@ -21,11 +22,15 @@
 		return;
 	}
     // NOTE: We don't need to blur the currently visible proxy, because it gets closed out by the close: call.
-	[visibleProxy autorelease];
-
+	TiWindowProxy * oldProxy = visibleProxy;
 	visibleProxy = [newVisibleProxy retain];
+	[oldProxy _tabBeforeBlur];
 	[newVisibleProxy _tabBeforeFocus];
+
+	[oldProxy _tabBlur];
 	[newVisibleProxy _tabFocus];
+
+	[oldProxy release];
 }
 
 -(void)dealloc
@@ -54,7 +59,7 @@
 		[windowProxy prepareForNavView:controller];
 		
 		root = windowProxy;
-		[self setVisibleProxy:windowProxy];
+//		[self setVisibleProxy:windowProxy];
 	}
 	return controller;
 }
@@ -115,6 +120,7 @@
 	NSMutableArray* newControllers = [NSMutableArray arrayWithArray:controller.viewControllers];
 	BOOL animated = [TiUtils boolValue:@"animated" properties:properties def:(windowController == [newControllers lastObject])];
 	[newControllers removeObject:windowController];
+	[closingProxy autorelease];
 	closingProxy = [window retain];
 	[controller setViewControllers:newControllers animated:animated];
 	
@@ -144,8 +150,8 @@
 	{
 		if (visibleProxy != nil && visibleProxy!=root && opening==NO)
 		{
-			//TODO: This is a hideous hack, but NavGroup needs rewriting anyways
-			[[self proxy] close:[NSArray arrayWithObject:visibleProxy]];
+			//TODO: This is an expedient fix, but NavGroup needs rewriting anyways
+			[(TiUIiPhoneNavigationGroupProxy*)[self proxy] close:[NSArray arrayWithObject:visibleProxy]];
 		}
 		[self setVisibleProxy:newWindow];
 	}

@@ -13,13 +13,22 @@
 NSArray* bufferKeySequence = nil;
 
 @implementation TiBuffer
-@synthesize data;
+@synthesize data, byteOrder;
 
 #pragma mark Internals
+
+-(id)init
+{
+    if (self = [super init]) {
+        byteOrder = [[NSNumber numberWithInt:CFByteOrderGetCurrent()] retain];
+    }
+    return self;
+}
 
 -(void)dealloc
 {
     RELEASE_TO_NIL(data);
+    RELEASE_TO_NIL(byteOrder);
     [super dealloc];
 }
 

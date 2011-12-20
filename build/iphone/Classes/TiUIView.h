@@ -70,6 +70,9 @@ void ModifyScrollViewForKeyboardHeightAndContentHeightWithResponderRect(UIScroll
 @property(nonatomic,readwrite,assign)	UIView *touchDelegate;
 @property(nonatomic,readonly)			id transformMatrix;
 @property(nonatomic,readwrite,retain) id backgroundImage;
+@property(nonatomic,readonly) BOOL touchEnabled;
+
+-(CALayer *)backgroundImageLayer;
 
 -(void)animate:(TiAnimation *)newAnimation;
 

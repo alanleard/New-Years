@@ -18,8 +18,6 @@
 {
 	pthread_rwlock_init(&viewsLock, NULL);
 	[self replaceValue:NUMINT(0) forKey:@"currentPage" notification:NO];
-	[self replaceValue:NUMFLOAT(1) forKey:@"minZoomScale" notification:NO];
-	[self replaceValue:NUMFLOAT(1) forKey:@"maxZoomScale" notification:NO];
 	[super _initWithProperties:properties];
 }
 
@@ -146,8 +144,8 @@
 	}
 
 	[doomedView performSelectorOnMainThread:@selector(detachView) withObject:nil waitUntilDone:NO];
-	[self forgetProxy:args];
-	[viewProxies removeObject:args];
+	[self forgetProxy:doomedView];
+	[viewProxies removeObject:doomedView];
 	[self unlockViews];	
 
 	[[self view] performSelectorOnMainThread:@selector(removeView:) withObject:args waitUntilDone:NO];

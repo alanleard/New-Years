@@ -15,8 +15,8 @@
 #ifdef USE_TI_UI2DMATRIX	
 	#import "Ti2DMatrix.h"
 #endif
-#ifdef USE_TI_UI3DMATRIX	
-	#import "Ti3DMatrix.h"
+#ifdef USE_TI_UIIOS3DMATRIX
+	#import "TiUIiOS3DMatrix.h"
 #endif
 #import "TiViewProxy.h"
 #import "TiApp.h"
@@ -202,7 +202,7 @@ DEFINE_EXCEPTIONS
 	self = [super init];
 	if (self != nil)
 	{
-		
+
 	}
 	return self;
 }
@@ -344,10 +344,10 @@ DEFINE_EXCEPTIONS
 		return;
 	}
 #endif
-#ifdef USE_TI_UI3DMATRIX	
-	if ([transformMatrix isKindOfClass:[Ti3DMatrix class]])
+#ifdef USE_TI_UIIOS3DMATRIX	
+	if ([transformMatrix isKindOfClass:[TiUIiOS3DMatrix class]])
 	{
-		self.layer.transform = CATransform3DConcat(CATransform3DMakeAffineTransform(virtualParentTransform),[(Ti3DMatrix*)transformMatrix matrix]);
+		self.layer.transform = CATransform3DConcat(CATransform3DMakeAffineTransform(virtualParentTransform),[(TiUIiOS3DMatrix*)transformMatrix matrix]);
 		return;
 	}
 #endif
@@ -399,6 +399,11 @@ DEFINE_EXCEPTIONS
 	self.alpha = [TiUtils floatValue:opacity];
 }
 
+-(CALayer *)backgroundImageLayer
+{
+	return [self layer];
+}
+
 -(void)setBackgroundImage_:(id)image
 {
 	NSURL *bgURL = [TiUtils toURL:image proxy:proxy];
@@ -414,8 +419,8 @@ DEFINE_EXCEPTIONS
 							 interpolationQuality:kCGInterpolationNone image:resultImage hires:NO];
 	}
 
-	self.layer.contents = (id)resultImage.CGImage;
-	self.layer.contentsCenter = TiDimensionLayerContentCenter(topCap, leftCap, topCap, leftCap, [resultImage size]);
+	[self backgroundImageLayer].contents = (id)resultImage.CGImage;
+	[self backgroundImageLayer].contentsCenter = TiDimensionLayerContentCenter(topCap, leftCap, topCap, leftCap, [resultImage size]);
 	self.clipsToBounds = image!=nil;
     self.backgroundImage = image;
 }
@@ -468,7 +473,7 @@ DEFINE_EXCEPTIONS
 //	Redraw ourselves if changing from invisible to visible, to handle any changes made
 	if (!self.hidden) {
 		TiViewProxy* viewProxy = (TiViewProxy*)[self proxy];
-		[viewProxy reposition];
+        [viewProxy willEnqueue];
 	}
 }
 
@@ -673,6 +678,29 @@ DEFINE_EXCEPTIONS
 	[[[TiApp controller] view] becomeFirstResponder];
 }
 
+#pragma mark Recognizers
+
+-(void)recognizedPinch:(UIPinchGestureRecognizer*)recognizer 
+{ 
+    NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:
+                           NUMDOUBLE(recognizer.scale), @"scale", 
+                           NUMDOUBLE(recognizer.velocity), @"velocity", 
+                           nil]; 
+    [self.proxy fireEvent:@"pinch" withObject:event]; 
+}
+
+-(void)recognizedLongPress:(UILongPressGestureRecognizer*)recognizer 
+{ 
+    if ([recognizer state] == UIGestureRecognizerStateBegan) {
+        CGPoint p = [recognizer locationInView:self];
+        NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:
+                               NUMFLOAT(p.x), @"x",
+                               NUMFLOAT(p.y), @"y",
+                               nil];
+        [self.proxy fireEvent:@"longpress" withObject:event]; 
+    }
+}
+
 #pragma mark Touch Events
 
 - (void)handleSwipeLeft
@@ -751,11 +779,17 @@ DEFINE_EXCEPTIONS
 		return nil;
 	}
 	
+    // OK, this is problematic because of the situation where:
+    // touchDelegate --> view --> button
+    // The touch never reaches the button, because the touchDelegate is as deep as the touch goes.
+    
+    /*
 	// delegate to our touch delegate if we're hit but it's not for us
 	if (hasTouchListeners==NO && touchDelegate!=nil)
 	{
 		return touchDelegate;
 	}
+     */
 	
     return [super hitTest:point withEvent:event];
 }
@@ -818,16 +852,16 @@ DEFINE_EXCEPTIONS
 		{
 			if (touchDelegate == nil) {
 				[proxy fireEvent:@"click" withObject:evt propagate:YES];
-			}
-			else {
+				return;
+			} else {
 				[touchDelegate touchesBegan:touches withEvent:event];
 			}
-		}
-		else if ([touch tapCount] == 2 && [proxy _hasListeners:@"dblclick"])
-		{
+		} else if ([touch tapCount] == 2 && [proxy _hasListeners:@"dblclick"]) {
 			[proxy fireEvent:@"dblclick" withObject:evt propagate:YES];
+			return;
 		}
 	}
+	[super touchesBegan:touches withEvent:event];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event 
@@ -869,6 +903,7 @@ DEFINE_EXCEPTIONS
 	{
 		[touchDelegate touchesMoved:touches withEvent:event];
 	}
+	[super touchesMoved:touches withEvent:event];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event 
@@ -972,6 +1007,7 @@ DEFINE_EXCEPTIONS
 	{
 		[touchDelegate touchesEnded:touches withEvent:event];
 	}
+	[super touchesEnded:touches withEvent:event];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event 
@@ -1000,9 +1036,20 @@ DEFINE_EXCEPTIONS
 	{
 		[touchDelegate touchesCancelled:touches withEvent:event];
 	}
+	[super touchesCancelled:touches withEvent:event];
 }
 
 #pragma mark Listener management
+
+-(void)removeGestureRecognizerOfClass:(Class)c
+{
+    for (UIGestureRecognizer* r in [self gestureRecognizers]) {
+        if ([r isKindOfClass:c]) {
+            [self removeGestureRecognizer:r];
+            break;
+        }
+    }
+}
 
 -(void)handleListenerAddedWithEvent:(NSString *)event
 {
@@ -1020,15 +1067,22 @@ DEFINE_EXCEPTIONS
 		handlesSwipes = YES;
 	}
 	
-	if (handlesTouches || handlesTaps || handlesSwipes)
-	{
-		self.userInteractionEnabled = YES;
-	}
-	
 	if (handlesTaps)
 	{
 		self.multipleTouchEnabled = YES;
 	}
+    
+    if ([event isEqualToString:@"pinch"]) {
+        [self removeGestureRecognizerOfClass:[UIPinchGestureRecognizer class]];
+        UIPinchGestureRecognizer* pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(recognizedPinch:)];
+        [self addGestureRecognizer:pinchRecognizer];
+        [pinchRecognizer release];
+    } else if ([event isEqualToString:@"longpress"]) {
+        [self removeGestureRecognizerOfClass:[UILongPressGestureRecognizer class]];
+        UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(recognizedLongPress:)];
+        [self addGestureRecognizer:longPressRecognizer];
+        [longPressRecognizer release];
+    }
 }
 
 -(void)handleListenerRemovedWithEvent:(NSString *)event
@@ -1059,14 +1113,13 @@ DEFINE_EXCEPTIONS
 	{
 		handlesSwipes = NO;
 	}
-	
-	if (handlesTaps == NO && handlesTouches == NO)
-	{
-		self.userInteractionEnabled = NO;
-		self.multipleTouchEnabled = NO;
-	}
-}
 
+    if ([event isEqualToString:@"pinch"]) {
+        [self removeGestureRecognizerOfClass:[UIPinchGestureRecognizer class]];
+    } else if ([event isEqualToString:@"longpress"]) {
+        [self removeGestureRecognizerOfClass:[UILongPressGestureRecognizer class]];
+    }
+}
 
 -(void)listenerAdded:(NSString*)event count:(int)count
 {

@@ -73,16 +73,23 @@ var tab6 = Titanium.UI.createTab({
     window:win6
 });
 
-
 tabGroup.addTab(tab1);  
 tabGroup.addTab(tab2);  
 tabGroup.addTab(tab3);  
 tabGroup.addTab(tab4); 
 tabGroup.addTab(tab6); 
  
-
+if(Ti.Platform.osname !='android'){
 tabGroup.open({
 	transition:Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
 });
+} else {
+	tabGroup.open();
+}
 
+var openDialog = Ti.UI.createAlertDialog({
+	title:'Welcome to the New Years App',
+	message:'Enjoy the New Year countdown in all 24 standard time zones.\n\nWhen the clock hits midnight\nAuld Lang Syne will start playing\n(if your sound is on) and the lyrics will appear on the screen.\n\nEnjoy your 2012 New Years Eve!'
+});
 
+openDialog.show();

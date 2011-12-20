@@ -183,6 +183,11 @@ NSString* const DATA_IFACE = @"pdp_ip0";
 
 #pragma mark Public APIs
 
+-(NSString*)runtime
+{
+	return @"javascriptcore";
+}
+
 -(NSString*)locale
 {
 	// this will return the locale that the user has set the phone in
@@ -194,6 +199,7 @@ NSString* const DATA_IFACE = @"pdp_ip0";
 
 -(id)id
 {
+	NSLog(@"[WARN] Ti%@.Platform.id DEPRECATED in 1.8.0", @"tanium");
 	return macaddress;
 }
 
@@ -201,6 +207,20 @@ NSString* const DATA_IFACE = @"pdp_ip0";
 {
 	return [TiUtils createUUID];
 }
+
+-(NSNumber*) is24HourTimeFormat: (id) unused
+{
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setLocale:[NSLocale currentLocale]];
+	[dateFormatter setTimeStyle:kCFDateFormatterShortStyle];
+	NSString *dateInStringForm = [dateFormatter stringFromDate:[NSDate date]];
+	NSRange amRange = [dateInStringForm rangeOfString:[dateFormatter AMSymbol]];
+	NSRange pmRange = [dateInStringForm rangeOfString:[dateFormatter PMSymbol]];
+	[dateFormatter release];
+	return NUMBOOL(amRange.location == NSNotFound && pmRange.location == NSNotFound);
+	
+}
+
 
 - (NSNumber*)availableMemory
 {
@@ -236,11 +256,11 @@ NSString* const DATA_IFACE = @"pdp_ip0";
 	return NUMBOOL([[UIApplication sharedApplication] canOpenURL:url]);
 }
 
--(PlatformModuleDisplayCapsProxy*)displayCaps
+-(TiPlatformDisplayCaps*)displayCaps
 {
 	if (capabilities == nil)
 	{
-		return [[[PlatformModuleDisplayCapsProxy alloc] _initWithPageContext:[self executionContext]] autorelease];
+		return [[[TiPlatformDisplayCaps alloc] _initWithPageContext:[self executionContext]] autorelease];
 	}
 	return capabilities;
 }

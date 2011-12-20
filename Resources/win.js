@@ -2,7 +2,7 @@ function newwin(offset){
 
 function newyears(offset){
 dateFuture = new Date(2011,11,31,23,59,59);
-//dateFuture = new Date(2011,10,28,20,13,00);
+//dateFuture = new Date(2011,11,19,20,00,00);
 //tzOffset = -8;
 tzOffset = offset;
 
@@ -11,9 +11,9 @@ dx = dx.substr(0,dx.length -3);
 tzCurrent=(dateFuture.getTimezoneOffset()/60)*-2;
 dateFuture.setTime(Date.parse(dx))
 dateFuture.setHours(dateFuture.getHours() + tzCurrent - tzOffset);
-var label = Ti.UI.createLabel({color:'#fff', textAlign:'center', top:10, font:{fontSize:24, fontWeight:'bold'}, height:'auto', width:'auto'});
+var label = Ti.UI.createLabel({color:'#fff',textAlign:'center', top:10, font:{fontSize:24, fontWeight:'bold'}, height:'auto', width:'auto', zIndex:100});
 if(Ti.Platform.osname == 'ipad'){
-	label.font = {fontSize:36, fontWeight:'bold'}
+	label.font = {fontSize:36, fontWeight:'bold'};
 	label.top=50;
 }
 var out;
@@ -29,12 +29,13 @@ function GetCount(){
 	if(amount < 0){
 		
 		music.play();
+		musicBtn();
 		label.text="Happy New Year!";
 		clearInterval(interval);
 	}
 	
 	else{
-
+		
 		days=0;hours=0;mins=0;secs=0;out="";
 
 		amount = Math.floor(amount/1000);//kill the "milliseconds" so just secs
@@ -62,6 +63,7 @@ var interval = setInterval(function(){
 	GetCount();
 }, 1000);
 GetCount();
+
 return label;
 }
 
@@ -74,23 +76,137 @@ win.backgroundImage = 'bg.png';
         Titanium.UI.PORTRAIT,
         Titanium.UI.LANDSCAPE_LEFT,
         Titanium.UI.LANDSCAPE_RIGHT];
+        
+var modal = Ti.UI.createView({
+		backgroundColor:'#000',
+		top:0,
+		bottom:0,
+		left:0,
+		right:0,
+		borderRadius:10,
+		visible:false,
+		zIndex:0,
+		opacity:0.01
+   });
+var countBack = Ti.UI.createView({
+	backgroundColor:'#000',
+	top:0, 
+	height:70, 
+	left:0, 
+	right:0
+});
+
+var lyricTitle = Ti.UI.createLabel({
+	text: 'Auld Lang Syne Lyrics',
+	font:{fontWeight:'bold', fontSize:18},
+	top:5,
+	height:'auto',
+	color:'#fff',
+	textAlign:'center'
+});
+var lyrics = Ti.UI.createLabel({
+   	text:"Should auld acquaintance be forgot,\nAnd never brought to mind?\nShould auld acquaintance be forgot,\nAnd auld lang syne!\n\n Chorus:\nFor auld lang syne, my dear,\n For auld lang syne.\nWe'll take a cup o' kindness yet,\nFor auld lang syne.",
+	color:'#fff', 
+	textAlign:'center',
+	height:'auto', top:15, bottom:40, left:0, right:0});
+
+var line = Ti.UI.createView({backgroundColor:'#fff', left:10, right:10, height:1, top:75});
+var lyricView = Ti.UI.createView({layout:'vertical', height:'auto'});
+   
+var scroll = Ti.UI.createScrollView({width:'100%', height:'100%', contentWidth:'100%', contentHeight:'auto'});
+lyricView.add(line);
+lyricView.add(lyricTitle);
+lyricView.add(lyrics);
+scroll.add(lyricView);
+modal.add(scroll);
+modal.add(countBack);
+win.add(modal);
 
 var button = Titanium.UI.createButton({
 	
   title:'Music',
   	image:'MusicOn.png',
-   bottom:4,
+   bottom:8,
    left:8
 });
 
 var photo = Ti.UI.createButton({
 	image:'photoBtn.png',
-	bottom:4,
+	bottom:8,
 	right:8
 });
-//if(!Titanium.Media.NO_CAMERA){
+var Stopbutton = Titanium.UI.createButton({
+  title:'Stop',
+image:'MusicOff.png',
+   bottom:8,
+   left:8,
+   visible:false
+});
+
+
+if(Ti.Platform.osname == 'ipad'){
+	photo.image = 'photoBtn@2x.png';
+	button.image = 'MusicOn@2x.png';
+	Stopbutton.image = 'MusicOff@2x.png';
+	lyrics.font = {fontSize:30};
+	lyricTitle.font = {fontSize:40, fontWeight:'bold'};
+	line.visible = false;var anim1 = Ti.UI.createAnimation({
+		duration:speed/2,
+		left:view.left-(distance/2),
+		curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN
+	});
+	var anim2 = Ti.UI.createAnimation({
+		duration:speed,
+		left:view.left+distance,
+		autoreverse:true,
+		repeat:count,
+		curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN_OUT
+	});
+
+	var anim3 = Ti.UI.createAnimation({
+		duration:speed/2,
+		left:view.left+(distance/2),
+		curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_OUT
+	});
+	view.animate( anim1 );
+
+	anim2.addEventListener('complete',function(){
+		view.animate( anim3 );
+	});
+	anim1.addEventListener('complete',function(){
+		view.animate( anim2 );
+
+	});var anim1 = Ti.UI.createAnimation({
+		duration:speed/2,
+		left:view.left-(distance/2),
+		curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN
+	});
+	var anim2 = Ti.UI.createAnimation({
+		duration:speed,
+		left:view.left+distance,
+		autoreverse:true,
+		repeat:count,
+		curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN_OUT
+	});
+
+	var anim3 = Ti.UI.createAnimation({
+		duration:speed/2,
+		left:view.left+(distance/2),
+		curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_OUT
+	});
+	view.animate( anim1 );
+
+	anim2.addEventListener('complete',function(){
+		view.animate( anim3 );
+	});
+	anim1.addEventListener('complete',function(){
+		view.animate( anim2 );
+
+	});
+}
+if(Ti.Media.isCameraSupported){
 win.add(photo);
-//}
+}
 photo.addEventListener('click', function(){
 	var win = Ti.UI.createWindow({
 		url:'photo.js',
@@ -98,14 +214,7 @@ photo.addEventListener('click', function(){
 	});
 	win.open();
 });
-var Stopbutton = Titanium.UI.createButton({
-  title:'Stop',
-image:'MusicOff.png',
-   bottom:4,
-   left:8
-});
 
-Stopbutton.hide();
 
 var music = Titanium.Media.createSound({
 	url:'AuldLangSyne.mp3',
@@ -117,15 +226,26 @@ function musicBtn(){
 if(music.playing){
 	button.hide();
 	Stopbutton.show();
+	modal.show();
+	modal.animate({opacity:0.85, duration:3000});
 }else {
 	Stopbutton.hide();
 	button.show();
+	modal.animate({opacity:0.01, duration:1000});
+	setTimeout(function(){
+		modal.hide();
+	}, 1000);
+	
+	
 }
 }, 100);
 }
+
+
 button.addEventListener('click',function(e){
    music.play();
    musicBtn();
+   
 });
 	
 Stopbutton.addEventListener('click',function(a){

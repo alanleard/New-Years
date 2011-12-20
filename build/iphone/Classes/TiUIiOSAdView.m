@@ -10,8 +10,6 @@
 #import "TiUIiOSAdView.h"
 #import "TiUtils.h"
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0
-
 #ifdef USE_TI_UIIOSADVIEW
 
 extern NSString * const TI_APPLICATION_ANALYTICS;
@@ -133,7 +131,5 @@ extern NSString * const TI_APPLICATION_ANALYTICS;
 
 @end
 
-
-#endif
 
 #endif
