@@ -11,10 +11,10 @@
     </deployment-targets>
     <id>com.2011NewYears.app</id>
     <name>New Years</name>
-    <version>1.0</version>
+    <version>2.0</version>
     <publisher>alanleard</publisher>
     <url>http://winewebdesign.com</url>
-    <description>not specified</description>
+    <description>2012 New Years App</description>
     <copyright>2011 by alanleard</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>

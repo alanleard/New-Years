@@ -2,7 +2,7 @@ function newwin(offset){
 
 function newyears(offset){
 dateFuture = new Date(2011,11,31,23,59,59);
-//dateFuture = new Date(2011,11,19,20,00,00);
+//dateFuture = new Date(2011,11,19,23,35,00);
 //tzOffset = -8;
 tzOffset = offset;
 
@@ -150,59 +150,7 @@ if(Ti.Platform.osname == 'ipad'){
 	Stopbutton.image = 'MusicOff@2x.png';
 	lyrics.font = {fontSize:30};
 	lyricTitle.font = {fontSize:40, fontWeight:'bold'};
-	line.visible = false;var anim1 = Ti.UI.createAnimation({
-		duration:speed/2,
-		left:view.left-(distance/2),
-		curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN
-	});
-	var anim2 = Ti.UI.createAnimation({
-		duration:speed,
-		left:view.left+distance,
-		autoreverse:true,
-		repeat:count,
-		curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN_OUT
-	});
-
-	var anim3 = Ti.UI.createAnimation({
-		duration:speed/2,
-		left:view.left+(distance/2),
-		curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_OUT
-	});
-	view.animate( anim1 );
-
-	anim2.addEventListener('complete',function(){
-		view.animate( anim3 );
-	});
-	anim1.addEventListener('complete',function(){
-		view.animate( anim2 );
-
-	});var anim1 = Ti.UI.createAnimation({
-		duration:speed/2,
-		left:view.left-(distance/2),
-		curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN
-	});
-	var anim2 = Ti.UI.createAnimation({
-		duration:speed,
-		left:view.left+distance,
-		autoreverse:true,
-		repeat:count,
-		curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN_OUT
-	});
-
-	var anim3 = Ti.UI.createAnimation({
-		duration:speed/2,
-		left:view.left+(distance/2),
-		curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_OUT
-	});
-	view.animate( anim1 );
-
-	anim2.addEventListener('complete',function(){
-		view.animate( anim3 );
-	});
-	anim1.addEventListener('complete',function(){
-		view.animate( anim2 );
-
-	});
+	line.visible = false;
 }
 if(Ti.Media.isCameraSupported){
 win.add(photo);

@@ -1,11 +1,12 @@
 Logfile initialized
 [INFO] logfile = /Users/alanleard/TiApps/New Years/build.log
-[DEBUG] /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.v20111103123855/android/builder.py install New Years /Applications/android-sdk-mac_x86 /Users/alanleard/TiApps/New Years com.2011NewYears.app 8
-[INFO] Titanium SDK version: 1.8.0 (11/03/11 12:38 8c28f36...)
+[DEBUG] /Library/Application Support/Titanium/mobilesdk/osx/1.8.0.1.v20111128162049/android/builder.py install New Years /Applications/android-sdk-mac_x86 /Users/alanleard/TiApps/New Years com.2011NewYears.app 8
+[INFO] Titanium SDK version: 1.8.0.1 (11/28/11 16:20 f80e354...)
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 1 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.108263 seconds on emulator to get ready
+[DEBUG] waited 3.200324 seconds on emulator to get ready
+[INFO] Waiting for the Android Emulator to become available
 [DEBUG] com.2011NewYears.app installed? False
 [INFO] Copying project resources..
 [INFO] Detected tiapp.xml change (or assets deleted), forcing full re-build...
@@ -18,7 +19,6 @@ Logfile initialized
 [TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/CST.js => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/CST.js
 [TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/Eastern.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/Eastern.png
 [TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/EST.js => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/EST.js
-[TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/Hawaii.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/Hawaii.png
 [TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/HST.js => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/HST.js
 [TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/iTunesArtwork => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/iTunesArtwork
 [TRACE] COPYING CREATED FILE: /Users/alanleard/TiApps/New Years/Resources/Mountain.png => /Users/alanleard/TiApps/New Years/build/android/bin/assets/Resources/Mountain.png

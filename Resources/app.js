@@ -86,10 +86,10 @@ tabGroup.open({
 } else {
 	tabGroup.open();
 }
-
+Titanium.Media.audioSessionMode= Titanium.Media.AUDIO_SESSION_MODE_PLAYBACK;
 var openDialog = Ti.UI.createAlertDialog({
 	title:'Welcome to the New Years App',
-	message:'Enjoy the New Year countdown in all 24 standard time zones.\n\nWhen the clock hits midnight\nAuld Lang Syne will start playing\n(if your sound is on) and the lyrics will appear on the screen.\n\nEnjoy your 2012 New Years Eve!'
+	message:'Enjoy the New Year countdown in all 24 standard time zones.\n\nWhen the clock hits midnight\nAuld Lang Syne will start playing\n(if your sound is on) and the lyrics will appear on the screen.\n\nHave a great 2012 New Years Eve!'
 });
 
 openDialog.show();
