@@ -102,18 +102,19 @@ var lyricTitle = Ti.UI.createLabel({
 	top:5,
 	height:'auto',
 	color:'#fff',
-	textAlign:'center'
+	textAlign:'center',
+	width:'100%'
 });
 var lyrics = Ti.UI.createLabel({
    	text:"Should auld acquaintance be forgot,\nAnd never brought to mind?\nShould auld acquaintance be forgot,\nAnd auld lang syne!\n\n Chorus:\nFor auld lang syne, my dear,\n For auld lang syne.\nWe'll take a cup o' kindness yet,\nFor auld lang syne.",
 	color:'#fff', 
 	textAlign:'center',
-	height:'auto', top:15, bottom:40, left:0, right:0});
+	height:'auto', top:15, bottom:40, left:0, right:0, width:'100%'});
 
 var line = Ti.UI.createView({backgroundColor:'#fff', left:10, right:10, height:1, top:75});
 var lyricView = Ti.UI.createView({layout:'vertical', height:'auto'});
    
-var scroll = Ti.UI.createScrollView({width:'100%', height:'100%', contentWidth:'100%', contentHeight:'auto'});
+var scroll = Ti.UI.createScrollView({width:Ti.Platform.displayCaps.platformWidth, height:Ti.Platform.displayCaps.platformHeight, contentWidth:'auto', contentHeight:'auto'});
 lyricView.add(line);
 lyricView.add(lyricTitle);
 lyricView.add(lyrics);
@@ -153,7 +154,7 @@ if(Ti.Platform.osname == 'ipad'){
 	line.visible = false;
 }
 if(Ti.Media.isCameraSupported){
-win.add(photo);
+//win.add(photo);
 }
 photo.addEventListener('click', function(){
 	var win = Ti.UI.createWindow({

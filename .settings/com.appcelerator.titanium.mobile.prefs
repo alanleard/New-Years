@@ -1,3 +1,6 @@
-#Fri Nov 11 11:39:50 PST 2011
+#Thu Dec 29 17:29:11 PST 2011
 MOBILE_PROJECT_SDK_VERSION=1.8.0.v20111103123855
+android/alias=new_years
+android/keystore=/Users/alanleard/TiApps/New Years/new-years-key.keystore
+android/output_location=/Users/alanleard/Desktop
 eclipse.preferences.version=1
