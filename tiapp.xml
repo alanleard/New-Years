@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <property name="ti.android.runtime">v8</property>
-    <sdk-version>1.8.0</sdk-version>
+    <sdk-version>2.1.4.GA</sdk-version>
     <deployment-targets>
         <target device="mobileweb">true</target>
         <target device="iphone">true</target>
@@ -11,11 +11,11 @@
     </deployment-targets>
     <id>com.newyears.app</id>
     <name>New Years</name>
-    <version>2.0</version>
+    <version>3.0</version>
     <publisher>alanleard</publisher>
     <url>http://winewebdesign.com</url>
-    <description>2012 New Years App</description>
-    <copyright>2011 by alanleard</copyright>
+    <description>2013 New Years App</description>
+    <copyright>2012 by alanleard</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>true</prerendered-icon>
@@ -28,6 +28,9 @@
     <iphone>
         <orientations device="iphone">
             <orientation>Ti.UI.PORTRAIT</orientation>
+            <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
         </orientations>
         <orientations device="ipad">
             <orientation>Ti.UI.PORTRAIT</orientation>
@@ -37,7 +40,7 @@
         </orientations>
     </iphone>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest android:versionCode="2" android:versionName="1.0" xmlns:android="http://schemas.android.com/apk/res/android"/>
+        <manifest android:versionCode="3" android:versionName="2.0" xmlns:android="http://schemas.android.com/apk/res/android"/>
     </android>
     <modules/>
 </ti:app>

@@ -1,119 +1,115 @@
 var win = Ti.UI.currentWindow;
-// win.orientationModes = [
-        // Titanium.UI.LANDSCAPE_LEFT]
-// Titanium.UI.orientation = Titanium.UI.LANDSCAPE_LEFT;
-win.fullscreen = true;
-var actInd = Ti.UI.createActivityIndicator({color:'#fff'});
-
-actInd.style= Titanium.UI.iPhone.ActivityIndicatorStyle.BIG;
-var hideView = Ti.UI.createView({backgroundColor:'#000', opacity:0.9, visible:false, zIndex:100});
-
-hideView.add(actInd);
-actInd.show();
-
-var newYearPhoto = 'photo.png';
-
-var t3 = Ti.UI.create2DMatrix();
-	t3 = t3.rotate(90);
-	
-if(Ti.Platform.osname == 'android'){
-	t3 = ''
-}
-var santa = Titanium.UI.createImageView({
-	image:'photo.png',
-	width:480,
-	height:320,
-	transform:t3
-	
-});
-
-if(Ti.Platform.osname == 'ipad'){
-	santa.image ='photoIpad.png';
-	santa.height = 768;
-	santa.width = 1024;
-}
-
-var button = Ti.UI.createButton({
-	title:'Take Picture',
-	height:30,
-	width:150,
-	bottom:70,
-	left:-45,
-	transform:t3
-});
 
 
-var back = Titanium.UI.createButton({
-	top:20,
-	right:5,
-	height:30,
-	width:50,
-	title:'Back',
-	transform:t3
-});
 
-
-var overlay = Titanium.UI.createView();
-
-
-overlay.add(santa);
-overlay.add(back);
-overlay.add(button);
-//win.add(overlay);
+// var overlay = Titanium.UI.createView();
+// overlay.add(overlayImage);
 // 
+	// var button = Ti.UI.createButton({
+		// title:'Take Picture',
+		// width:200,
+		// right:10,
+		// height:40,
+		// bottom:10,
+	// });
+	// overlay.add(button);
+	// var cancel = Ti.UI.createButton({
+		// title:'Cancel',
+		// width:70,
+		// left:10,
+		// height:40,
+		// bottom:10
+	// });
+	// overlay.add(cancel);
+	// var cameras = Ti.Media.availableCameras;
 // 
+	// if(cameras){
+// 		
+// 
+		// for (var c=0;c<cameras.length;c++)
+		// {
+// 
+			// if (cameras[c]==Ti.Media.CAMERA_REAR)
+				// {
+					// var flipBtn = Titanium.UI.createButton({
+						// top:5,
+						// right:10,
+						// height:40,
+						// width:50,
+						// font:{fontSize:20,fontWeight:'bold',fontFamily:'Helvetica Neue'},
+						// title:'Flip'
+					// });
+// 					
+					// overlay.add(flipBtn);		
+// 					
+					// flipBtn.addEventListener('click', function(){
+						// if (Ti.Media.camera == 0){ //back camera 
+							// Ti.Media.switchCamera(1); 
+						// }
+						// else{
+							// Ti.Media.switchCamera(0);
+						// }
+					// });
+			// }
+		// }
+// }
+	// button.addEventListener('click',function()
+	// {
+		// Ti.Media.takePicture();
+	// });
+// 	
+	// cancel.addEventListener('click', function(){
+		// Ti.Media.hideCamera();
+	// });
 
-overlay.add(hideView);
 
-
-button.addEventListener('click',function()
-{
-	//Ti.Media.vibrate();
-	Ti.Media.takePicture();
-});
-
-back.addEventListener('click', function(){
-	Ti.Media.hideCamera();
-	win.close();
-});
-
-
-Titanium.Media.showCamera({
-
-	success:function(event)
-	{
-		hideView.show();
-		var win = Ti.UI.currentWindow;
-		win.orientationModes = [
-        Titanium.UI.LANDSCAPE_RIGHT];
-		Titanium.UI.orientation = Titanium.UI.LANDSCAPE_RIGHT;
-		win.fullscreen = true;
-	
-		var santa2 = Titanium.UI.createImageView({
+function photoSuccess(event){
+		win.orientationModes = [Titanium.UI.LANDSCAPE_LEFT];
+		Titanium.UI.orientation = Titanium.UI.LANDSCAPE_LEFT;
+		var overlayImage = Titanium.UI.createImageView({
 			image:'photo.png',
-			width:480,
-			height:320
+			top:0,
+			left:0, 
+			right:0,
+			bottom:0,
+			touchEnabled:false
 		});
-		if(Ti.Platform.osname == 'ipad'){
-			santa2.image ='photoIpad.png';
-			santa.height = 768;
-			santa.width = 1024;
+		
+		if(Ti.Platform.displayCaps.platformHeight>800 || Ti.Platform.osname == 'ipad'){
+			overlayImage.image = 'photoIpad.png'
 		}
-		var view = Ti.UI.createView({top:0, left:0, right:0, bottom:0});
-		// place our picture into our window
+		
+		var factor = 2.9;
+		
 		var imageView = Ti.UI.createImageView({
 			image:event.media,
-			width:win.width,
-			height:win.height
+			height:'size',
+			width:'size',
+			center:{x:(factor*event.media.width)/2, y:(factor*event.media.height)/2}
 		});
-		view.add(imageView);
+		var zoomView = Ti.UI.createScrollView({
+			contentHeight:event.media.height*factor, 
+			contentWidth:event.media.width*factor,
+			top:0,
+			left:0,
+			right:0, 
+			bottom:0, 
+			zoomScale:1.0, 
+			minZoomScale:0.2, 
+			maxZoomScale:4.0,
+			backgroundColor:'#000000'
+		});
+
+		zoomView.setContentOffset({x:((factor*event.media.width-Ti.Platform.displayCaps.platformWidth)/2), y:((factor*event.media.height-Ti.Platform.displayCaps.platformHeight)/2)})
+
+		var photoView = Ti.UI.createView();
 		
-		
-		view.add(santa2);
-		win.add(view);
-		
-		// programatically hide the camera
-		
+		//bufferView.add(imageView);
+		zoomView.add(imageView);
+		//zoomView.add(bufferView);
+		photoView.add(zoomView);
+		photoView.add(overlayImage);
+		win.add(photoView);
 		
 		var save = Ti.UI.createButton({
 			title:'Save',
@@ -122,36 +118,48 @@ Titanium.Media.showCamera({
 			width:60,
 			height:30
 		});
-		
+
 		win.add(save);
 		
 		var cancel = Ti.UI.createButton({
 			title:'Cancel',
-			top:5,
-			left:5,
+			bottom:5,
+			right:75,
 			width:60,
-			height:30
+			height:30,
+			zIndex:1000
 		});
-		
+
 		win.add(cancel);
 		
-		save.addEventListener('click', function(){
-			Titanium.Media.saveToPhotoGallery(view.toImage());
-			win.close();
-			var aDialog = Ti.UI.createAlertDialog({title:"New Year's Image Saved", message:"Your picture was saved in the \nphoto gallery."});
-			aDialog.show();
-		});
-		
 		cancel.addEventListener('click', function(){
-			
+
 			win.close();
+			
 		});
-		Ti.Media.hideCamera();
-		hideView.hide();
 		
-	},
+
+		
+		save.addEventListener('click', function(){
+
+				Titanium.Media.saveToPhotoGallery(photoView.toImage());
+				alert('Image saved to Gallery');
+				win.close();
+			
+		});
+		
+
+	}
+
+function camera(){
+	
+Titanium.Media.showCamera({
+
+	success:photoSuccess
+	,
 	cancel:function()
 	{
+		win.close();
 	},
 	error:function(error)
 	{
@@ -159,17 +167,248 @@ Titanium.Media.showCamera({
 		if (error.code == Titanium.Media.NO_CAMERA)
 		{
 			a.setMessage('Sorry, you need a camera.');
-			win.close();
 		}
 		else
 		{
 			a.setMessage('Unexpected error: ' + error.code);
-			win.close();
 		}
 		a.show();
 	},
-	overlay:overlay,
-	showControls:false,	// don't show system controls
 	mediaTypes:Ti.Media.MEDIA_TYPE_PHOTO,
-	autohide:false // tell the system not to auto-hide and we'll do it ourself
-});
+	autohide:true // tell the system not to auto-hide and we'll do it ourself
+	});
+};
+
+function gallery(){
+	Titanium.Media.openPhotoGallery({
+
+	success:photoSuccess
+	,
+	cancel:function()
+	{
+		win.close();
+	},
+	error:function(error)
+	{
+		var a = Titanium.UI.createAlertDialog({title:'Camera'});
+		
+			a.setMessage('Unexpected error: ' + error.code);
+		
+		a.show();
+	},
+	//overlay:overlay,
+	//showControls:false,	// don't show system controls
+	mediaTypes:Ti.Media.MEDIA_TYPE_PHOTO,
+	autohide:true // tell the system not to auto-hide and we'll do it ourself
+	});
+};
+
+function selectImage(){
+
+					if(Ti.Media.isCameraSupported){
+						var dialog = Ti.UI.createOptionDialog({
+							title: 'First, grab an image!',
+							options:['Camera', 'Photo Gallery', 'Cancel'],
+							buttonNames: ['Camera', 'Photo Gallery' ],
+							cancel:2
+						})
+						dialog.show();
+							
+						dialog.addEventListener('click', function(e){
+							switch(e.index)
+							{
+							case 0:
+								camera();
+							  break;
+							case 1:
+								gallery();
+							  break;
+							case 2:
+							    win.close();
+							}
+						});
+					} else {
+						gallery();
+					}
+				}
+selectImage();
+
+
+
+
+
+// var win = Ti.UI.currentWindow;
+// // win.orientationModes = [
+        // // Titanium.UI.LANDSCAPE_LEFT]
+// // Titanium.UI.orientation = Titanium.UI.LANDSCAPE_LEFT;
+// win.fullscreen = true;
+// var actInd = Ti.UI.createActivityIndicator({color:'#fff'});
+// 
+// actInd.style= Titanium.UI.iPhone.ActivityIndicatorStyle.BIG;
+// var hideView = Ti.UI.createView({backgroundColor:'#000', opacity:0.9, visible:false, zIndex:100});
+// 
+// hideView.add(actInd);
+// actInd.show();
+// 
+// var newYearPhoto = 'photo.png';
+// 
+// var t3 = Ti.UI.create2DMatrix();
+	// t3 = t3.rotate(90);
+// 	
+// if(Ti.Platform.osname == 'android'){
+	// t3 = ''
+// }
+// var santa = Titanium.UI.createImageView({
+	// image:'photo.png',
+	// width:480,
+	// height:320,
+	// transform:t3
+// 	
+// });
+// 
+// if(Ti.Platform.osname == 'ipad'){
+	// santa.image ='photoIpad.png';
+	// santa.height = 768;
+	// santa.width = 1024;
+// }
+// 
+// var button = Ti.UI.createButton({
+	// title:'Take Picture',
+	// height:30,
+	// width:150,
+	// bottom:70,
+	// left:-45,
+	// transform:t3
+// });
+// 
+// 
+// var back = Titanium.UI.createButton({
+	// top:20,
+	// right:5,
+	// height:30,
+	// width:50,
+	// title:'Back',
+	// transform:t3
+// });
+// 
+// 
+// var overlay = Titanium.UI.createView();
+// 
+// 
+// overlay.add(santa);
+// overlay.add(back);
+// overlay.add(button);
+// //win.add(overlay);
+// // 
+// // 
+// 
+// overlay.add(hideView);
+// 
+// 
+// button.addEventListener('click',function()
+// {
+	// //Ti.Media.vibrate();
+	// Ti.Media.takePicture();
+// });
+// 
+// back.addEventListener('click', function(){
+	// Ti.Media.hideCamera();
+	// win.close();
+// });
+// 
+// 
+// Titanium.Media.showCamera({
+// 
+	// success:function(event)
+	// {
+		// hideView.show();
+		// var win = Ti.UI.currentWindow;
+		// win.orientationModes = [
+        // Titanium.UI.LANDSCAPE_RIGHT];
+		// Titanium.UI.orientation = Titanium.UI.LANDSCAPE_RIGHT;
+		// win.fullscreen = true;
+// 	
+		// var santa2 = Titanium.UI.createImageView({
+			// image:'photo.png',
+			// width:480,
+			// height:320
+		// });
+		// if(Ti.Platform.osname == 'ipad'){
+			// santa2.image ='photoIpad.png';
+			// santa.height = 768;
+			// santa.width = 1024;
+		// }
+		// var view = Ti.UI.createView({top:0, left:0, right:0, bottom:0});
+		// // place our picture into our window
+		// var imageView = Ti.UI.createImageView({
+			// image:event.media,
+			// width:win.width,
+			// height:win.height
+		// });
+		// view.add(imageView);
+// 		
+// 		
+		// view.add(santa2);
+		// win.add(view);
+// 		
+		// // programatically hide the camera
+// 		
+// 		
+		// var save = Ti.UI.createButton({
+			// title:'Save',
+			// bottom:5,
+			// right:5,
+			// width:60,
+			// height:30
+		// });
+// 		
+		// win.add(save);
+// 		
+		// var cancel = Ti.UI.createButton({
+			// title:'Cancel',
+			// top:5,
+			// left:5,
+			// width:60,
+			// height:30
+		// });
+// 		
+		// win.add(cancel);
+// 		
+		// save.addEventListener('click', function(){
+			// Titanium.Media.saveToPhotoGallery(view.toImage());
+			// win.close();
+			// var aDialog = Ti.UI.createAlertDialog({title:"New Year's Image Saved", message:"Your picture was saved in the \nphoto gallery."});
+			// aDialog.show();
+		// });
+// 		
+		// cancel.addEventListener('click', function(){
+// 			
+			// win.close();
+		// });
+		// Ti.Media.hideCamera();
+		// hideView.hide();
+// 		
+	// },
+	// cancel:function()
+	// {
+	// },
+	// error:function(error)
+	// {
+		// var a = Titanium.UI.createAlertDialog({title:'Camera'});
+		// if (error.code == Titanium.Media.NO_CAMERA)
+		// {
+			// a.setMessage('Sorry, you need a camera.');
+			// win.close();
+		// }
+		// else
+		// {
+			// a.setMessage('Unexpected error: ' + error.code);
+			// win.close();
+		// }
+		// a.show();
+	// },
+	// overlay:overlay,
+	// showControls:false,	// don't show system controls
+	// mediaTypes:Ti.Media.MEDIA_TYPE_PHOTO,
+	// autohide:false // tell the system not to auto-hide and we'll do it ourself
+// });

@@ -1,0 +1,80 @@
+================================================================================
+Appcelerator Titanium Diagnostics Build Log
+The contents of this file are useful to send to Appcelerator Support if
+reporting an issue to help us understand your environment, build settings
+and aid in debugging. Please attach this log to any issue that you report.
+================================================================================
+
+Starting build at 12/11/12 08:31
+
+Build details:
+
+   timestamp=11/09/12 12:46
+   module_apiversion=2
+   version=2.1.4
+   githash=51f2c64
+
+
+Script arguments:
+   /Library/Application Support/Titanium/mobilesdk/osx/2.1.4.GA/iphone/builder.py
+   simulator
+   5.0
+   /Users/alanleard/TiApps/New Years
+   com.newyears.app
+   New Years
+   universal
+   iphone
+   
+
+Building from: /Library/Application Support/Titanium/mobilesdk/osx/2.1.4.GA/iphone
+Platform: Darwin Kernel Version 10.8.0: Tue Jun  7 16:33:36 PDT 2011; root:xnu-1504.15.3~1/RELEASE_I386
+
+Xcode path is: /Developer
+
+
+githash=51f2c64, existing_git_hash=51f2c64
+writing contents of /Users/alanleard/TiApps/New Years/build/iphone/project.xcconfig:
+
+TI_VERSION=2.1.4.GA
+TI_SDK_DIR=/Library/Application Support/Titanium/mobilesdk/osx/$(TI_VERSION)/iphone
+TI_APPID=com.newyears.app
+OTHER_LDFLAGS[sdk=iphoneos*]=$(inherited) -weak_framework iAd
+OTHER_LDFLAGS[sdk=iphonesimulator*]=$(inherited) -weak_framework iAd
+#include "module"
+
+old contents
+
+
+Generated the following stylecode code:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>classes</key>
+		<dict>
+</dict>
+
+		<key>classes_density</key>
+		<dict>
+</dict>
+
+		<key>ids</key>
+		<dict>
+</dict>
+
+		<key>ids_density</key>
+		<dict>
+</dict>
+
+		<key>tags</key>
+		<dict>
+</dict>
+
+		<key>tags_density</key>
+		<dict>
+</dict>
+
+	</dict>
+</plist>
+Finishing build
