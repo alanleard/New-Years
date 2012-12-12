@@ -24,7 +24,6 @@ dependencies: \
   /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/TiBuffer.h \
   /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/TiBlob.h \
   /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/TiUIAlertDialogProxy.h \
-  /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/Ti2DMatrix.h \
   /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/TiAnimation.h \
   /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/TiPoint.h \
   /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/ListenerEntry.h \

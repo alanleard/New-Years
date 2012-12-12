@@ -175,14 +175,21 @@ function listWindow(){
 		
 		setHome.addEventListener('click', function(){
 			var tabData = e.rowData;
-		//	tabData.title = 'New Years Countdown'
-			global.homeWin = timewin;
+		//	tabData.title = "New Year's Countdown:"
+			
+			var homeWin = newwin(tabData);
+			
+			homeWin.title = "New Year's Countdown";
+			
+			global.homeWin = homeWin;
+			
 			var newTab = Titanium.UI.createTab({  
 			    icon:'home.png',
 			    title:'Home',
-			    window:newwin(tabData)
+			    window:homeWin
 			});
 			timewin.close();
+			
 			global.tab1.window = global.homeWin
 			global.tabgroup.removeTab(global.tab1);
 

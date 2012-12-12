@@ -114,7 +114,7 @@ if(global.homeWin){
 			    title:'Home',
 			    window:win
 			});
-			
+			win.title = "New Year's Countdown";
 			tabGroup.addTab(tab);
 			
 			global.tab1 = tab;
@@ -153,12 +153,12 @@ tabGroup.open({
 }
 Titanium.Media.audioSessionMode= Titanium.Media.AUDIO_SESSION_MODE_PLAYBACK;
 var openDialog = Ti.UI.createAlertDialog({
-	title:'Welcome to the New Years App',
-	message:'Enjoy the New Years countdown in 43 different time zones.\n\nWhen the clock hits midnight\nAuld Lang Syne will start playing\n(if your sound is on) and the lyrics will appear on the screen.\n\nHave a great 2013 New Years Eve!', buttonNames:['Ok'], cancel:0
+	title:"Welcome to the New Year's App",
+	message:"Enjoy the New Year's countdown in 43 different time zones.\n\nWhen the clock hits midnight\nAuld Lang Syne will start playing\n(if your sound is on) and the lyrics will appear on the screen.\n\nHave a great 2013 New Year's Eve!", buttonNames:['Ok'], cancel:0
 });
 
 if(Ti.Platform.osname =='android'){
-	openDialog.messsage = 'Enjoy the New Year countdown in 43 different time zones.\n\nWhen the clock hits midnight Auld Lang Syne will start playing (if your sound is on) and the lyrics will appear on the screen.\n\nHave a great 2013 New Years Eve!'
+	openDialog.messsage = "Enjoy the New Year countdown in 43 different time zones.\n\nWhen the clock hits midnight Auld Lang Syne will start playing (if your sound is on) and the lyrics will appear on the screen.\n\nHave a great 2013 New Year's Eve!";
 }
 
 // win.addEventListener('open', function(){

@@ -1,3 +1,0 @@
-var newwin = require('win');
-
-newwin({title:'PST',tmz:{hour:-8}});

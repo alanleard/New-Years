@@ -36,7 +36,6 @@ dependencies: \
   /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/ASI/ASIProgressDelegate.h \
   /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/ASI/ASICacheDelegate.h \
   /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/ASI/ASINetworkQueue.h \
-  /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/Ti2DMatrix.h \
   /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/TiViewProxy.h \
   /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/TiApp.h \
   /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/TiHost.h \

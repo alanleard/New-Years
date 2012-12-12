@@ -44,5 +44,4 @@ dependencies: \
   /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/TiTabGroup.h \
   /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/TiUIWindow.h \
   /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/TiViewController.h \
-  /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/TiUIiPhoneAnimationStyleProxy.h \
-  /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/TiUIiPhoneActivityIndicatorStyleProxy.h
+  /Users/alanleard/TiApps/New\ Years/build/iphone/Classes/TiUIiPhoneAnimationStyleProxy.h
