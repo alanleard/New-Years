@@ -7,88 +7,6 @@ global.tabgroup = tabGroup;
 var myTMZ = new Date();
 myTMZ =myTMZ.getTimezoneOffset();
 
-// var win = Titanium.UI.createWindow({
-        // // title:"New Year's Count Down",
-		// // backgroundColor: '#000',
-		// // url:'PST.js',
-		// // barColor:'#000'
-// // });
-// 
-// var tab1 = Titanium.UI.createTab({  
-    // icon:'Pacific.png',
-    // title:'Pacific',
-    // window:win
-// });
-// 
-// var win2 = Titanium.UI.createWindow({
-        // // title:"New Year's Count Down",
-		// // backgroundColor: '#000',
-		// // url:'MST.js',
-		// // barColor:'#000'
-// // });
-// 
-// 
-// var tab2 = Titanium.UI.createTab({  
-    // icon:'Mountain.png',
-    // title:'Mountain',
-    // window:win2
-// });
-// 
-// 
-// var win3 = Titanium.UI.createWindow({
-        // title:"New Year's Count Down",
-		// backgroundColor: '#000',
-		// url: 'CST.js',
-		// barColor:'#000'
-// 
-    // });
-// 
-// 
-// var tab3 = Titanium.UI.createTab({  
-    // icon:'Central.png',
-    // title:'Central',
-    // window:win3
-// });
-// 
-// 
-// var win4 = Titanium.UI.createWindow({
-        // title:"New Year's Count Down",
-		// backgroundColor: '#000',
-		// url: 'EST.js',
-		// barColor:'#000'
-// 
-    // });
-// 
-// var tab4 = Titanium.UI.createTab({  
-    // icon:'Eastern.png',
-    // title:'Eastern',
-    // window:win4
-// });
-// 
-// 
-
-// 
-// tabGroup.addTab(tab1);  
-// tabGroup.addTab(tab2);  
-// tabGroup.addTab(tab3);  
-// tabGroup.addTab(tab4); 
- 
-var otherWin = require('other');
-
-var win2 = otherWin();
-
-global.listWin = win2;
-    
-var tab2 = Titanium.UI.createTab({  
-    icon:'world.png',
-    title:'World',
-    window:win2
-});
-
-tabGroup.addTab(tab2);
-
-global.tab2 = tab2;
-
 if(global.homeWin){
 	var tab = Titanium.UI.createTab({  
 			    icon:'world.png',
@@ -106,16 +24,17 @@ if(global.homeWin){
 	
 	   	if(myTMZ == (data[i].tmz*60*-1)){
 	   		set = true;
-	   		var newwin = require('win');
-			var win = newwin(data[i]);
 	   		
+	   		var newWin = require('win');
+			var win = newWin(data[i]);
+	   		var currentTitle = global.data[i].title 
+	   		global.data[i].title = "Current: "+ currentTitle;
 	   		var tab = Titanium.UI.createTab({  
 			    icon:'home.png',
 			    title:'Home',
 			    window:win
 			});
 			win.title = "New Year's Countdown";
-			tabGroup.addTab(tab);
 			
 			global.tab1 = tab;
 	   	} 
@@ -125,22 +44,37 @@ if(global.homeWin){
 	}
 	if(set == false){
 		set = true;
-	   		var newwin = require('win');
-			var win = newwin(data[17]);
-	   		
+	   		var newWin = require('win');
+			var win = newWin(data[17]);
+			var currentTitle = global.data[i].title 
+	   		global.data[i].title = "Current: "+ currentTitle;
 	   		var tab = Titanium.UI.createTab({  
 			    icon:'home.png',
 			    title:'Home',
 			    window:win
 			});
 			
-			tabGroup.addTab(tab);
-			
 			global.tab1 = tab;
 			alert("We were unable to determine your timezone.  Select your timezone from the 'World' list and set it as 'home'")
 	}
 }
 
+var worldWin = require('world');
+
+var win2 = worldWin();
+
+global.worldWin = win2;
+    
+var tab2 = Titanium.UI.createTab({  
+    icon:'world.png',
+    title:'World',
+    window:win2
+});
+
+tabGroup.addTab(tab2);
+
+global.tab2 = tab2;
+tabGroup.addTab(tab);
 
 tabGroup.setActiveTab(global.tab1)
 

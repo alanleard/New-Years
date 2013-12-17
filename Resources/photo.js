@@ -19,38 +19,59 @@ function photoSuccess(event){
 		overlayImage.image = 'photoIpad.png'
 	}
 	
-	//var factor = 2.9;
+	var factor = 2;
+	// var imgHeight;
+	// var imgWidth;
+	// if(event.media.height>event.media.width){
+		// imgHeight = Ti.Platform.displayCaps.platformHeight;
+// 		
+		// imgWidth = 'size';
+		// //zoomView.zoomScale =Ti.Platform.displayCaps.platformHeight/event.media.height
+	// } else {
+		// imgWidth = Ti.Platform.displayCaps.platformWidth;
+		// imgHeight = 'size';
+		// //zoomView.zoomScale =Ti.Platform.displayCaps.platformWidth/event.media.width
+	// }
 	
+	// alert('imgHeight: '+imgHeight+'imgWidth: '+imgWidth)
 	var imageView = Ti.UI.createImageView({
 		image:event.media,
-		height:'size',
-		width:'size',
+		// height:imgHeight,
+		// width:imgWidth,
 		//center:{x:(event.media.width)/2, y:(event.media.height)/2}
-		// center:{x:(factor*event.media.width)/2, y:(factor*event.media.height)/2}
+		center:{x:(factor*event.media.width)/2, y:(factor*event.media.height)/2}
 	});
 	var zoomView = Ti.UI.createScrollView({
-		// contentHeight:event.media.height*factor, 
-		// contentWidth:event.media.width*factor,
-		contentHeight:event.media.height, 
-		contentWidth:event.media.width,
+		contentHeight:event.media.height*factor, 
+		contentWidth:event.media.width*factor,
+		// contentHeight:'auto', 
+		// contentWidth:'auto',
 		top:20,
 		left:20,
 		right:20, 
 		bottom:20, 
 		zoomScale:1.0, 
-		minZoomScale:0.2, 
+		minZoomScale:0.01, 
 		maxZoomScale:4.0,
 		backgroundColor:'#000000'
 	});
+	
+	// if(event.media.height>event.media.width){
+		// zoomView.zoomScale =Ti.Platform.displayCaps.platformHeight/event.media.height
+	// } else {
+		// zoomView.zoomScale =Ti.Platform.displayCaps.platformWidth/event.media.width
+	// }
 	// if(event.media.width>Ti.Platform.displayCaps.platformWidth){
-		// zoomView.minZoomScale =( Ti.Platform.displayCaps.platformWidth/2 )/event.media.width
-		// alert("min: "+zoomView.minZoomScale)
+		// zoomView.zoomScale =Ti.Platform.displayCaps.platformWidth/event.media.width
+		// alert("min: "+zoomView.zoomScale)
 	// } else {
 		// zoomView.zoomScale = (Ti.Platform.displayCaps.platformWidth)/event.media.width
 		// alert("zoom:"+zoomView.zoomScale)	
 	// }
-	//zoomView.setContentOffset({x:((factor*event.media.width-Ti.Platform.displayCaps.platformWidth)/2), y:((factor*event.media.height-Ti.Platform.displayCaps.platformHeight)/2)})
+	//zoomView.contentOffset = {x:((factor*event.media.width-Ti.Platform.displayCaps.platformWidth)/2), y:((factor*event.media.height-Ti.Platform.displayCaps.platformHeight)/2)}
+	zoomView.contentOffset = {x:(((factor*event.media.width)/2)-(Ti.Platform.displayCaps.platformWidth/2)), y:(((factor*event.media.height)/2)-(Ti.Platform.displayCaps.platformHeight/2))}
 
+	
 	var photoView = Ti.UI.createView();
 
 	zoomView.add(imageView);
@@ -62,18 +83,18 @@ function photoSuccess(event){
 		title:'Save',
 		bottom:5,
 		right:5,
-		width:60,
-		height:30
+		width:'size',
+		height:'size'
 	});
 
 	win.add(save);
 	
 	var cancel = Ti.UI.createButton({
 		title:'Cancel',
-		bottom:5,
-		right:75,
-		width:60,
-		height:30,
+		top:5,
+		right:5,
+		width:'size',
+		height:'size',
 		zIndex:1000
 	});
 
@@ -85,8 +106,6 @@ function photoSuccess(event){
 		
 	});
 	
-
-	
 	save.addEventListener('click', function(){
 
 			Titanium.Media.saveToPhotoGallery(photoView.toImage());
@@ -94,7 +113,10 @@ function photoSuccess(event){
 			win.close();
 		
 	});
-		
+	var alertDialog = Ti.UI.createAlertDialog({
+		title:'Pinch and Zoom to adjust image.'
+	});
+	alertDialog.show();
 
 }
 
@@ -102,7 +124,10 @@ function camera(){
 	
 Titanium.Media.showCamera({
 
-	success:photoSuccess
+	success:function(e){
+		Titanium.Media.saveToPhotoGallery(e.media);
+		photoSuccess(e)
+	}
 	,
 	cancel:function()
 	{

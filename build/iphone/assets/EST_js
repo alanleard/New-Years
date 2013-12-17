@@ -1,3 +1,0 @@
-Ti.include('win.js');
-
-newwin({hour:-5});

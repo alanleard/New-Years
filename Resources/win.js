@@ -55,23 +55,26 @@ function newwin(data){
 		
 		var button = Titanium.UI.createButton({
 			
-		  title:'Music',
-		  	image:'MusicOn.png',
+		  //title:'Music',
+		  image:'MusicOn.png',
 		   bottom:8,
-		   left:8
+		   left:8,
+		   backgroundColor:'transparent'
 		});
 		
 		var photo = Ti.UI.createButton({
 			image:'photoBtn.png',
 			bottom:8,
-			right:8
+			right:8,
+			backgroundColor:'transparent'
 		});
 		var Stopbutton = Titanium.UI.createButton({
-		  title:'Stop',
-		image:'MusicOff.png',
+		 // title:'Stop',
+			image:'MusicOff.png',
 		   bottom:8,
 		   left:8,
-		   visible:false
+		   visible:false,
+		   backgroundColor:'transparent'
 		});
 		
 		
@@ -83,9 +86,9 @@ function newwin(data){
 			lyricTitle.font = {fontSize:40, fontWeight:'bold'};
 			line.visible = false;
 		}
-		//if(Ti.Media.isCameraSupported){
-		win.add(photo);
-		//}
+		if(Ti.Platform.osname != 'android'){
+			win.add(photo);
+		}
 		photo.addEventListener('click', function(){
 			var win = Ti.UI.createWindow({
 				url:'photo.js',
@@ -165,6 +168,13 @@ function newwin(data){
 			var day = '1';       
 			var hour = 0;   
 			var minutes = 0;
+			///////TESTING//////
+			// var year = "2012"
+			// var month = 11;     
+			// var day = '13';       
+			// var hour = 14;   
+			// var minutes = 42;
+// 			
 			var tz = data.tmz;    
 			
 			var label = Ti.UI.createLabel({color:'#fff',textAlign:'center', top:10, font:{fontSize:24, fontWeight:'bold'}, height:'size', width:'size', zIndex:100});
